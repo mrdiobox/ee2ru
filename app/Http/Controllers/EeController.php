@@ -32,8 +32,8 @@ class EeController extends Controller
             else  $prog2 = 0;
         }
             $ret = array(
-               // 'progress2'=>$prog2, 'frt'=>$first_el, 'cnt'=>$cnt
-                'progress2'=>40, 'frt'=>0, 'cnt'=>$cnt
+                'progress2'=>$prog2, 'frt'=>$first_el, 'cnt'=>$cnt
+               // 'progress2'=>40, 'frt'=>0, 'cnt'=>$cnt
             );
             //sleep(5);
             return $ret;
