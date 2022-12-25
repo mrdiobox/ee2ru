@@ -12,6 +12,7 @@ class EeController extends Controller
     public function index() {
        return view('ee');
     }
+
     public function progressData() {
         $narva = new Narva();
         $cur_date = \Carbon\Carbon::now()->addDay(-0)->addHour(-0)->toDateTimeString();
@@ -41,7 +42,8 @@ class EeController extends Controller
     public function chartData($delta=0) {
         
         $narva = new Narva();
-        $cur_date = \Carbon\Carbon::now()->addDay(-$delta)->toDateString();
+        $cur_date = \Carbon\Carbon::now()->addDay(-$delta-24)->toDateString();
+    
         if ($delta!=0) {
             $format = 'Y-m-d H:i';
             $text = $cur_date;
@@ -51,28 +53,40 @@ class EeController extends Controller
             $format = 'Y-m-d';
             $text = 'last_24';
         }
+
        //DATE_FORMAT(created_at, "%Y-%m-%d %H") as hr,
         $lags= $narva->select(
             DB::raw('
             AVG(nvf_ab) as avg_nvf_ab, AVG(nvl_ab) as avg_nvl_ab,
             MAX(lagh_ab) as max_lagh_ab, 
-            DATE_FORMAT(created_at, "%H") as hrh
+            DATE_FORMAT(created_at, "%Y-%m-%d %H") as hr
             ')
             )
             ->where('created_at','<=', \Carbon\Carbon::createFromFormat($format, $cur_date))
             ->where('created_at','>=', \Carbon\Carbon::createFromFormat($format, $cur_date)->addHour(-24))
-            ->groupBy('hrh')
+            ->groupBy('hr')
             ->get();
            // dd(DB::getQueryLog());
+           //DATE_FORMAT(created_at, "%Y-%m-%d %H") as hrh
+           //DATE_FORMAT(created_at, "%H") as hrh
         foreach($lags as $lag) {
-            $days[] = $lag->hrh;
+            $days[] = $lag->hr;
             $cars[] = $lag->max_lagh_ab;
             $nvf[] = round($lag->avg_nvf_ab);
             $nvl[] = $lag->avg_nvl_ab;
         }
+        
+        $days2 = array_map(function($num){
+            $delta = 2;
+            $ret = substr($num, -2);
+            $ret = $ret + $delta;
+            if($ret>=24) $ret = 0 + $ret - 24;
+            return $ret;
+        }, $days);
+        
         //sleep(1);
         return $ret = array('graf' => [
-            'labels'=>$days,
+            'labels'=>$days2,
             'datasets'=>array([
                 'label'=>'Delay',
                 'borderWidth'=> '3',
@@ -82,7 +96,7 @@ class EeController extends Controller
             ])
             ], 
             'bar' => [
-                'labels'=>$days,
+                'labels'=>$days2,
                 'datasets'=>array([
                     
                     'label'=>'Amount of Cars',
