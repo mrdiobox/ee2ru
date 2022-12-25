@@ -14,7 +14,7 @@ class EeController extends Controller
     }
     public function progressData() {
         $narva = new Narva();
-        $cur_date = \Carbon\Carbon::now()->addDay(-13)->addHour(-0)->toDateTimeString();
+        $cur_date = \Carbon\Carbon::now()->addDay(-0)->addHour(-0)->toDateTimeString();
         $lags= $narva->select(DB::raw('id, lagh_ab , created_at'))
         ->where('created_at','<=', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $cur_date))
         ->orderByDesc('id')
