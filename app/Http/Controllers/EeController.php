@@ -41,7 +41,7 @@ class EeController extends Controller
     public function chartData($delta=0) {
         
         $narva = new Narva();
-        $cur_date = \Carbon\Carbon::now()->addDay(-$delta-24)->toDateString();
+        $cur_date = \Carbon\Carbon::now()->addDay(-$delta)->toDateString();
         if ($delta!=0) {
             $format = 'Y-m-d H:i';
             $text = $cur_date;
