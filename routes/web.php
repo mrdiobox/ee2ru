@@ -26,3 +26,9 @@ Route::get('/clear', function () {
  
     return "Кэш очищен.";
 });
+
+Route::get('/', [App\Http\Controllers\EeController::class, 'index']);
+Route::get('/ee/data-chart/{delta?}', [App\Http\Controllers\EeController::class, 'chartData']);
+Route::get('/ee/progress', [App\Http\Controllers\EeController::class, 'progressData']);
+Route::get('/ee/cars', [App\Http\Controllers\EeController::class, 'getCars']);
+Route::view('/about', 'about');
