@@ -19,7 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-<style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+ <style>
  .navbar-nav {
             margin-left: auto;
         }
@@ -29,6 +30,7 @@
     background-color: #292929 !important;;
 }
   </style>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -47,14 +49,8 @@
         <li class="nav-item">
           <a href="/about" class="nav-link">О сервисе</a>
         </li>
-        <li class="nav-item">
-          <a href="/contact" class="nav-link">Контакты</a>
-        </li>
       </ul>
     </div>
-
-
-
   </div>
 </nav>
 
