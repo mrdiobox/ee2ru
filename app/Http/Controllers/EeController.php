@@ -15,11 +15,14 @@ class EeController extends Controller
 
     public function progressData() {
         $narva = new Narva();
-        $cur_date = \Carbon\Carbon::now()->addDay(-0)->addHour(-0)->toDateTimeString();
+        $cur_date = \Carbon\Carbon::now()->addDay(-25)->addHour(-0)->toDateTimeString();
+        $cur_date2 = \Carbon\Carbon::now()->addDay(-25)->addHour(-1)->toDateTimeString();
         $lags= $narva->select(DB::raw('id, lagh_ab , created_at'))
         ->where('created_at','<=', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $cur_date))
+        ->where('created_at','>', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $cur_date2))
         ->orderByDesc('id')
-        ->limit(6)->get();
+        ->get();
+     
         $first_el = -1;
         $cnt=0;
         foreach($lags as $lag) {
@@ -29,7 +32,7 @@ class EeController extends Controller
             else {
                 if($lag->lagh_ab>$first_el) $cnt++;
             }
-            if ($cnt>0) $prog2 = $cnt*20;
+            if ($cnt>0) $prog2 = $cnt* round(100/(count($lags)-1));
             else  $prog2 = 0;
         }
             $ret = array(
