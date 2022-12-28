@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2WQ6LRZ9W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P2WQ6LRZ9W');
+</script>
     <meta name="yandex-verification" content="edd5013949f75dcc" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
