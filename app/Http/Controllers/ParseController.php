@@ -51,24 +51,26 @@ class ParseController extends Controller
         $this->results['narva']['nvf_ab'] = $this->row_results['narva']['nvf-1'];
         $this->results['narva']['frt_ab'] = Carbon::parse($this->row_results['narva']['frt-1']);
         $this->results['narva']['lagh_ab'] = $this->uptoOrNum($this->row_results['narva']['lagh-1']);
-
+        /*
         $this->results['narva']['nvl_c'] = $this->row_results['narva']['nvl-2'];
         $this->results['narva']['nvf_c'] = $this->row_results['narva']['nvf-2'];
         $this->results['narva']['frt_c'] = Carbon::parse($this->row_results['narva']['frt-2']);
         $this->results['narva']['lagh_c'] = $this->uptoOrNum($this->row_results['narva']['lagh-2']);
-        
+        */
         $validator = Validator::make($this->results['narva'], [
             'lql_ab' => 'integer',
             'nvl_ab' => 'integer',
             'nvf_ab' => 'integer',
             'frt_ab' => 'date',
-            'lagh_ab' => 'integer',
-
+            'lagh_ab' => 'integer'
+        ]);
+        /*
             'nvl_c' => 'integer',
             'nvf_c' => 'integer',
             'frt_c' => 'date',
             'lagh_c' => 'integer',
-        ]);
+            */
+        
 
         if ($validator->fails()) {
            \Log::debug('Narva parse validation error', $this->results['narva']);
@@ -82,10 +84,16 @@ class ParseController extends Controller
         $narva->frt_ab = $this->results['narva']['frt_ab'];
         $narva->lagh_ab = $this->results['narva']['lagh_ab'];
 
+        $narva->nvl_c = 0;
+        $narva->nvf_c = 0;
+        $narva->frt_c = '2022-12:31 15:00:00';
+        $narva->lagh_c = 0;
+/*
         $narva->nvl_c = $this->results['narva']['nvl_c'];
         $narva->nvf_c = $this->results['narva']['nvf_c'];
         $narva->frt_c = $this->results['narva']['frt_c'];
         $narva->lagh_c = $this->results['narva']['lagh_c'];
+        */
         $narva->save();
         $last_id = $narva->id;
 
