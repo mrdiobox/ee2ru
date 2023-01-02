@@ -19,7 +19,7 @@ class TelegramController extends Controller
             : $data['data']) , 'utf-8' );
         $method = 'sendMessage';
         switch ($message){
-            case 'Привет!':
+            case 'good':
                 $send_data = [
                     'text'=>'Привет из Турции! ))'
                 ];
