@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\ParseController;
+use App\Http\Controllers\TelegramController;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
