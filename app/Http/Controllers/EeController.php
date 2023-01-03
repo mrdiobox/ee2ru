@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class EeController extends Controller
 {
     public function index() {
-       return view('ee');
+       return view('ee')
     }
 
     public function progressData() {
