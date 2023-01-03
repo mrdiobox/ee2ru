@@ -88,12 +88,12 @@ class ParseController extends Controller
         $narva->nvf_c = 0;
         $narva->frt_c = '2022-12:31 15:00:00';
         $narva->lagh_c = 0;
-/*
+
         $narva->nvl_c = $this->results['narva']['nvl_c'];
         $narva->nvf_c = $this->results['narva']['nvf_c'];
         $narva->frt_c = $this->results['narva']['frt_c'];
         $narva->lagh_c = $this->results['narva']['lagh_c'];
-        */
+        
         $narva->save();
         $last_id = $narva->id;
 
