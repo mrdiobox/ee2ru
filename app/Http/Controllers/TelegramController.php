@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class TelegramController extends Controller
 {
     public function getDataFromTg(){
+        dd(config('settings.tbot_token'));
         $content = file_get_contents("php://input");
         $data = json_decode($content, true);
 
@@ -36,7 +37,7 @@ class TelegramController extends Controller
     private function sendTelegram($method,$data,$headers=[]){
 
         $handle = curl_init(
-'https://api.telegram.org/bot5482779721:AAEhT_FO4zaDHUtgINoJ_C0KlLK_wZyqIbU'
+'https://api.telegram.org/bot'
             .'/'.$method);
         curl_setopt($handle, CURLOPT_POST, true);
         curl_setopt($handle, CURLOPT_HEADER, 0);
