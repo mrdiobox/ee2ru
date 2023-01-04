@@ -58245,7 +58245,7 @@ var staticRenderFns = [
       _vm._v("\n        Telegram1\n        "),
       _c("script", { attrs: { type: "application/javascript" } }, [
         _vm._v(
-          "\n  function onTelegramAuth(user) {\n    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');\n  }\n"
+          "\n  function onTelegramAuth(user) {\n    console.log(user);\n    }\n"
         ),
       ]),
       _vm._v(" "),
