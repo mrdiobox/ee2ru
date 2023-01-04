@@ -2451,6 +2451,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2461,7 +2462,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
-    onTelegramAuth: function onTelegramAuth(user) {
+    tgAuth: function tgAuth(user) {
       alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
     }
   }
@@ -58245,7 +58246,7 @@ var staticRenderFns = [
       _vm._v("\n        Telegram1\n        "),
       _c("script", { attrs: { type: "application/javascript" } }, [
         _vm._v(
-          "\n  function onTelegramAuth(user) {\n    console.log(user);\n    }\n"
+          "\n  function onTelegramAuth(user) {\n    console.log(user);\n    tgAuth(user)\n    }\n"
         ),
       ]),
       _vm._v(" "),
