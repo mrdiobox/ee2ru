@@ -8,6 +8,9 @@
             <h1>Очередь Нарва - Ивангород</h1>
             <vue-ellipse-progress-b class="w-100"></vue-ellipse-progress-b>
             <h2>Список вызванных</h2>
+
+            <script type="application/javascript" async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="ee2ru_bot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+
             <car-numbers class="mb-10"></car-numbers>
         </div>
         <div class="col-md-8 col-sm-12 text-center">
