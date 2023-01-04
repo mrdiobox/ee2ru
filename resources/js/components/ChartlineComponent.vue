@@ -18,7 +18,7 @@
 
 
         <line-chart-down :chart-data="data.graf" :options="opt" :height="150"></line-chart-down>
-        <h2>Количество машин</h2>
+        <h2>Количество машин в очереди</h2>
         <bar-chart :chart-data="data.bar" :options="opt2" :height="150"></bar-chart>
     </div>
 </template>

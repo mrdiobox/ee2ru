@@ -58029,7 +58029,7 @@ var render = function () {
         attrs: { "chart-data": _vm.data.graf, options: _vm.opt, height: 150 },
       }),
       _vm._v(" "),
-      _c("h2", [_vm._v("Количество машин")]),
+      _c("h2", [_vm._v("Количество машин в очереди")]),
       _vm._v(" "),
       _c("bar-chart", {
         attrs: { "chart-data": _vm.data.bar, options: _vm.opt2, height: 150 },
