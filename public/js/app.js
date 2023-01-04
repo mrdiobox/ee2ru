@@ -2454,7 +2454,12 @@ __webpack_require__.r(__webpack_exports__);
       nums: []
     };
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {},
+  methods: {
+    onTelegramAuth: function onTelegramAuth(user) {
+      alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+    }
+  }
 });
 
 /***/ }),
