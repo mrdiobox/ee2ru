@@ -11,7 +11,7 @@ class TelegramController extends Controller
         echo 'Hello world! '.$id.' '.config('custom.telegram_token');
         $http = Http::post('https://api.telegram.org/bot'.config('custom.telegram_token').'/sendMessage', [
             'chat_id' => $id,
-            'text'=> 'Super test!'
+            'text'=> 'Привет от Андрей Громова из Турции! ))) ';
         ]);
         echo $http;
     }
