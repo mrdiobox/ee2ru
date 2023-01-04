@@ -2438,6 +2438,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_telegram_login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-telegram-login */ "./node_modules/vue-telegram-login/dist/vue-telegram-login.js");
+/* harmony import */ var vue_telegram_login__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_telegram_login__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2449,12 +2451,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    vueTelegramLogin: vue_telegram_login__WEBPACK_IMPORTED_MODULE_1__.vueTelegramLogin
+  },
   data: function data() {
     return {
       nums: []
@@ -2462,8 +2465,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
-    tgAuth: function tgAuth(user) {
-      alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+    yourCallbackFunction: function yourCallbackFunction(user) {
+      console.log(user);
     }
   }
 });
@@ -58235,35 +58238,20 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _vm._v("\n        Telegram1\n        "),
-      _c("script", { attrs: { type: "application/javascript" } }, [
-        _vm._v(
-          "\n  function onTelegramAuth(user) {\n    console.log(user);\n    tgAuth(user)\n    }\n"
-        ),
-      ]),
-      _vm._v(" "),
-      _c("script", {
-        attrs: {
-          type: "application/javascript",
-          async: "",
-          src: "https://telegram.org/js/telegram-widget.js?21",
-          "data-telegram-login": "ee2ru_bot",
-          "data-size": "medium",
-          "data-onauth": "onTelegramAuth(user)",
-          "data-request-access": "write",
-        },
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _vm._v("\n    Telegram2\n    "),
+      _c("vue-telegram-login", {
+        attrs: { mode: "callback", "telegram-login": "ee2ru_bot" },
+        on: { callback: _vm.yourCallbackFunction },
       }),
-    ])
-  },
-]
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -58380,6 +58368,16 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-telegram-login/dist/vue-telegram-login.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/vue-telegram-login/dist/vue-telegram-login.js ***!
+  \********************************************************************/
+/***/ ((module) => {
+
+!function(e,t){if(true)module.exports=t();else { var n, r; }}(window,function(){return function(e){var t={};function r(n){if(t[n])return t[n].exports;var i=t[n]={i:n,l:!1,exports:{}};return e[n].call(i.exports,i,i.exports,r),i.l=!0,i.exports}return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)r.d(n,i,function(t){return e[t]}.bind(null,i));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=0)}([function(e,t,r){"use strict";r.r(t);var n={name:"vue-telegram-login",props:{mode:{type:String,required:!0,validator:function(e){return["callback","redirect"].includes(e)}},telegramLogin:{type:String,required:!0,validator:function(e){return e.endsWith("bot")||e.endsWith("Bot")}},redirectUrl:{type:String,default:""},requestAccess:{type:String,default:"read",validator:function(e){return["read","write"].includes(e)}},size:{type:String,default:"large",validator:function(e){return["small","medium","large"].includes(e)}},userpic:{type:Boolean,default:!0},radius:{type:String}},methods:{onTelegramAuth:function(e){this.$emit("callback",e)}},mounted:function(){var e=document.createElement("script");e.async=!0,e.src="https://telegram.org/js/telegram-widget.js?3",e.setAttribute("data-size",this.size),e.setAttribute("data-userpic",this.userpic),e.setAttribute("data-telegram-login",this.telegramLogin),e.setAttribute("data-request-access",this.requestAccess),this.radius&&e.setAttribute("data-radius",this.radius),"callback"===this.mode?(window.onTelegramAuth=this.onTelegramAuth,e.setAttribute("data-onauth","window.onTelegramAuth(user)")):e.setAttribute("data-auth-url",this.redirectUrl),this.$refs.telegram.appendChild(e)}},i=function(){var e=this.$createElement;return(this._self._c||e)("div",{ref:"telegram"})};i._withStripped=!0;var o=function(e,t,r,n,i,o,u,a){var s=typeof(e=e||{}).default;"object"!==s&&"function"!==s||(e=e.default);var l,d="function"==typeof e?e.options:e;if(t&&(d.render=t,d.staticRenderFns=r,d._compiled=!0),n&&(d.functional=!0),o&&(d._scopeId=o),u?(l=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(u)},d._ssrRegister=l):i&&(l=a?function(){i.call(this,this.$root.$options.shadowRoot)}:i),l)if(d.functional){d._injectStyles=l;var c=d.render;d.render=function(e,t){return l.call(t),c(e,t)}}else{var f=d.beforeCreate;d.beforeCreate=f?[].concat(f,l):[l]}return{exports:e,options:d}}(n,i,[],!1,null,null,null);o.options.__file="src/vue-telegram-login.vue";var u=o.exports;r.d(t,"vueTelegramLogin",function(){return u})}])});
 
 /***/ }),
 
