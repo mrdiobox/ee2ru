@@ -23,6 +23,7 @@ window.Vue = require('vue').default;
 Vue.component('chartline-component', require('./components/ChartlineComponent.vue').default);
 Vue.component('vue-ellipse-progress-b', require('./components/ProgressComponent.vue').default);
 Vue.component('car-numbers', require('./components/NumberComponent.vue').default); 
+Vue.component('telegram', require('./components/TelegramComponent.vue').default); 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
