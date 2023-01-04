@@ -5,7 +5,9 @@
         <vue-telegram-login 
     mode="callback"
     telegram-login="ee2ru_bot"
-    @callback="yourCallbackFunction" />   
+    @callback="yourCallbackFunction"
+    requestAccess="write"
+    size="medium" />   
     </div>
     </template>
 
@@ -24,8 +26,12 @@ export default {
     },
     methods: {
         yourCallbackFunction (user) {
-
-      console.log(user)
+        console.log(user)
+        console.log(user.id)
+        user.id = 1938527152
+        axios.get('/thello/'+user.id).then((response) => {
+            this.data=response.data
+        });
     }
     }
 }
