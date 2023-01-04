@@ -7,8 +7,8 @@
     telegram-login="ee2ru_bot"
     @callback="yourCallbackFunction"
     requestAccess="write"
-    size="medium" />   
-    </div>
+    size="medium" />  
+</div>
     </template>
 
 <script>
@@ -22,15 +22,16 @@ export default {
             }
     },
     mounted() {
-        
+       // this.yourCallbackFunction()
     },
     methods: {
-        yourCallbackFunction (user) {
+        yourCallbackFunction: function (user) {
+        //let user=Object
+        //user.id = 1938527152
         console.log(user)
         console.log(user.id)
-        user.id = 1938527152
         axios.get('/thello/'+user.id).then((response) => {
-            this.data=response.data
+            console.log(response.data)
         });
     }
     }

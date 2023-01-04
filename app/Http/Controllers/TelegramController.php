@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TelegramController extends Controller
 {
+    public function tHello($id) {
+        echo 'Hello world! '.$id.' '.config('custom.telegram_token');
+        $http = Http::post('https://api.telegram.org/bot'.config('custom.telegram_token').'/sendMessage', [
+            'chat_id' => $id,
+            'text'=> 'Super test!'
+        ]);
+        echo $http;
+    }
     public function getDataFromTg(){
         dd(config('settings.tbot_token'));
         $content = file_get_contents("php://input");

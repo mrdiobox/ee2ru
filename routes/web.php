@@ -19,6 +19,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::any('/telegramsecret', [ TelegramController::class, 'getDataFromTg' ]);
+Route::any('/thello/{id}', [ TelegramController::class, 'tHello' ]);
 Route::get('/doparse', [ ParseController::class, 'doParse' ]);
 Route::get('/clear', function () {
     Artisan::call('cache:clear');

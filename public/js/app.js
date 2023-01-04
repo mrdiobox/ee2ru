@@ -2465,15 +2465,17 @@ __webpack_require__.r(__webpack_exports__);
       nums: []
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    // this.yourCallbackFunction()
+  },
   methods: {
     yourCallbackFunction: function yourCallbackFunction(user) {
-      var _this = this;
+      //let user=Object
+      //user.id = 1938527152
       console.log(user);
       console.log(user.id);
-      user.id = 1938527152;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/thello/' + user.id).then(function (response) {
-        _this.data = response.data;
+        console.log(response.data);
       });
     }
   }
@@ -58250,7 +58252,7 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _vm._v("\n    Telegram2\n    "),
+      _vm._v("\n        Telegram2\n        "),
       _c("vue-telegram-login", {
         attrs: {
           mode: "callback",
