@@ -2561,7 +2561,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/tauth', user).then(function (response) {
         console.log('test');
         console.log(response.data);
-        if (response.data.status == '1') {
+        if (response.data.status == '2') {
           _this5.authStatus = response.data.status;
           _this5.user.first_name = response.data.data.username;
         }

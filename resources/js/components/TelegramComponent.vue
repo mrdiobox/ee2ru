@@ -113,7 +113,7 @@ export default {
         axios.post('/tauth', user).then((response) => {
             console.log('test')
             console.log(response.data)
-            if (response.data.status == '1') {
+            if (response.data.status == '2') {
                 this.authStatus = response.data.status
                 this.user.first_name = response.data.data.username
             }
