@@ -2563,7 +2563,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         if (response.data.status == '1') {
           _this5.authStatus = response.data.status;
-          _this5.user.first_name = 'My ' + response.data.data.username;
+          _this5.user.first_name = response.data.data.username;
         }
       });
     }

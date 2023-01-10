@@ -115,7 +115,7 @@ export default {
             console.log(response.data)
             if (response.data.status == '1') {
                 this.authStatus = response.data.status
-                this.user.first_name = 'My ' + response.data.data.username
+                this.user.first_name = response.data.data.username
             }
         });
     }

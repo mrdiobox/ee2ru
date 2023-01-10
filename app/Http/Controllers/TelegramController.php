@@ -144,7 +144,7 @@ class TelegramController extends Controller
             $this->tHello($r['id'], 'Здравствуйте '.$r['first_name'].'! Это телеграм бот сайта EE2RU.RU');
             Log::debug('SS: '.$_SESSION['id']);
             $out = [
-                'status'=>'1',
+                'status'=>'2',
                 'data'=>[
                     'username'=>$r['first_name']
                 ]
