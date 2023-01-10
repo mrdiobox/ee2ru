@@ -7,7 +7,7 @@
         <div class="col-md-4 col-sm-12 text-center">
             <h1>Очередь Нарва - Ивангород</h1>
             <vue-ellipse-progress-b class="w-100"></vue-ellipse-progress-b>
-            <telegram />
+            <telegram></telegram>
             <h2>Список вызванных</h2>
             <car-numbers class="mb-10"></car-numbers>
         </div>
