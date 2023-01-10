@@ -20,6 +20,11 @@ Route::get('/', function () {
 
 Route::any('/telegramsecret', [ TelegramController::class, 'getDataFromTg' ]);
 Route::any('/thello/{id}', [ TelegramController::class, 'tHello' ]);
+Route::any('/tauth', [ TelegramController::class, 'tAuth' ]);
+Route::any('/addnumber', [ TelegramController::class, 'addNumber' ]);
+Route::any('/removenumber', [ TelegramController::class, 'removeNumber' ]);
+Route::any('/logout', [ TelegramController::class, 'logout' ]);
+Route::get('/iflogin', [ TelegramController::class, 'ifLogin' ]);
 Route::get('/doparse', [ ParseController::class, 'doParse' ]);
 Route::get('/clear', function () {
     Artisan::call('cache:clear');

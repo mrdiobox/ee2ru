@@ -2453,6 +2453,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2462,20 +2479,92 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      nums: []
+      number: '',
+      user: {},
+      tform: true,
+      token: '',
+      params: {},
+      authStatus: '-1'
     };
   },
   mounted: function mounted() {
-    // this.yourCallbackFunction()
+    this.yourCallbackFunction(this.user);
+    this.ifLogin();
   },
   methods: {
-    yourCallbackFunction: function yourCallbackFunction(user) {
-      //let user=Object
-      //user.id = 1938527152
-      console.log(user);
-      console.log(user.id);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/thello/' + user.id).then(function (response) {
+    logout: function logout() {
+      var _this = this;
+      console.log('LOGOut');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/logout').then(function (response) {
         console.log(response.data);
+        if (response.data.status) {
+          _this.authStatus = response.data.status;
+          user = Object();
+          number = '';
+        }
+      });
+    },
+    ifLogin: function ifLogin() {
+      var _this2 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/iflogin').then(function (response) {
+        console.log('ifLogin:');
+        console.log(response.data);
+        if (response.data.status) {
+          console.log('AS: ' + response.data.status);
+          _this2.authStatus = response.data.status;
+          _this2.user.first_name = response.data.data.username;
+          if (response.data.data.number) {
+            console.log('ifNumber:');
+            _this2.number = response.data.data.number;
+            _this2.user.first_name = response.data.data.username;
+          }
+        }
+      });
+    },
+    onSubmit: function onSubmit() {
+      var _this3 = this;
+      var params = {
+        'number': this.number
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/addnumber', params).then(function (response) {
+        console.log(response.data);
+        if (response.data.status) {
+          _this3.authStatus = response.data.status;
+          _this3.user.first_name = response.data.data.username;
+        }
+      });
+    },
+    onDelete: function onDelete() {
+      var _this4 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/removenumber').then(function (response) {
+        console.log(response.data);
+        if (response.data.status) {
+          _this4.number = '';
+          _this4.authStatus = response.data.status;
+        }
+      });
+    },
+    yourCallbackFunction: function yourCallbackFunction(user) {
+      var _this5 = this;
+      //let user=Object
+
+      //user.id =1938527152,
+      //user.first_name ="Андрей",
+      //user.last_name ="Громов",
+      //user.username ="mrdiobox",
+      //user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
+      //user.auth_date = 1673282790,
+      //user.hash="b1c8c6bc235deda1f5f453955298c9fbe3ec899902fa202a28732ee02af7bebc"
+
+      // console.log(user)
+      //console.log(user.id)
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/tauth', user).then(function (response) {
+        console.log('test');
+        console.log(response.data);
+        if (response.data.status == '1') {
+          _this5.authStatus = response.data.status;
+          _this5.user.first_name = 'My ' + response.data.data.username;
+        }
       });
     }
   }
@@ -58248,23 +58337,101 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _vm._v("\n        Telegram2\n        "),
-      _c("vue-telegram-login", {
-        attrs: {
-          mode: "callback",
-          "telegram-login": "ee2ru_bot",
-          requestAccess: "write",
-          size: "medium",
-        },
-        on: { callback: _vm.yourCallbackFunction },
-      }),
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container" }, [
+    _vm.authStatus === "2"
+      ? _c("div", [
+          _vm._v("\n            " + _vm._s(_vm.user.first_name) + " "),
+          _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function ($event) {
+                  return _vm.logout()
+                },
+              },
+            },
+            [_vm._v("Выйти")]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "review-form",
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.onSubmit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("label", { attrs: { for: "number" } }, [_vm._v("Номер:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.number,
+                    expression: "number",
+                  },
+                ],
+                attrs: { id: "number", placeholder: "Номер вашей очереди" },
+                domProps: { value: _vm.number },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.number = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "submit", value: "Следить" } }),
+            ]
+          ),
+        ])
+      : _vm.authStatus === "1"
+      ? _c("div", [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.user.first_name) +
+              " : " +
+              _vm._s(_vm.number) +
+              "\n            "
+          ),
+          _c(
+            "form",
+            {
+              staticClass: "review-form",
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.onDelete.apply(null, arguments)
+                },
+              },
+            },
+            [_c("input", { attrs: { type: "submit", value: "Удалить" } })]
+          ),
+        ])
+      : _c(
+          "div",
+          [
+            _c("vue-telegram-login", {
+              attrs: {
+                mode: "callback",
+                "telegram-login": "ee2ru_bot",
+                requestAccess: "write",
+                size: "medium",
+              },
+              on: { callback: _vm.yourCallbackFunction },
+            }),
+          ],
+          1
+        ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

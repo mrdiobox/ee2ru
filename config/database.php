@@ -1,9 +1,16 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\DBAL\TimestampType;
 
 return [
-
+    
+ 
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name

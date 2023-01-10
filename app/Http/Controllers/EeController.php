@@ -25,6 +25,7 @@ class EeController extends Controller
      
         $first_el = -1;
         $cnt=0;
+        $prog2=0;
         foreach($lags as $lag) {
             if($first_el == -1) {
                 $first_el = $lag->lagh_ab;
@@ -72,13 +73,15 @@ class EeController extends Controller
            // dd(DB::getQueryLog());
            //DATE_FORMAT(created_at, "%Y-%m-%d %H") as hrh
            //DATE_FORMAT(created_at, "%H") as hrh
+           $days = Array();
+           $days2 = Array();
         foreach($lags as $lag) {
             $days[] = $lag->hr;
             $cars[] = $lag->max_lagh_ab;
             $nvf[] = round($lag->avg_nvf_ab);
             $nvl[] = $lag->avg_nvl_ab;
         }
-        
+        if ($days) {
         $days2 = array_map(function($num){
             $delta = 2;
             $ret = substr($num, -2);
@@ -86,7 +89,7 @@ class EeController extends Controller
             if($ret>=24) $ret = 0 + $ret - 24;
             return $ret;
         }, $days);
-        
+        }
         //sleep(1);
         return $ret = array('graf' => [
             'labels'=>$days2,

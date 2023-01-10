@@ -41,11 +41,13 @@ class Handler extends ExceptionHandler
                 'file' => $e->getFile(),
                 'line' => $e->getLine()
             ];
+            /*
             Http::post('https://api.telegram.org/bot'.env('TELEGRAM_TOKEN').'/sendMessage', [
                 'chat_id' => env('TELEGRAM_ADMIN_ID'),
                 'text'=> (string)view('report', $data),
                 'parse_mode' => 'html'
             ]);
+            */
         });
     }
 }
