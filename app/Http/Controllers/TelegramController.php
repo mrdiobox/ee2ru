@@ -61,7 +61,7 @@ class TelegramController extends Controller
     }
     public function logout () {
         session_start();
-        $this->tHello($_SESSION['tel_id'], 'Вы больше не будете получать сообщений от бота сайта EE2RU.RU');
+        $this->tHello($_SESSION['tel_id'], 'Вы больше не будете получать сообщений от бота сайта '.config('app.url'));
         $_SESSION = array();
         session_destroy();
         $ret = Array('status'=>'-1');
@@ -117,7 +117,7 @@ class TelegramController extends Controller
     }
 
     public function tAuth(Request $request) {
-        $out = Array('status'=>'-1', 'token'=>'0');
+        $out = Array('status'=>'-1');
         $telUsers = new Teluser();
         Log::debug('Hello world');
         Log::debug($request->input());
@@ -144,7 +144,7 @@ class TelegramController extends Controller
             $_SESSION['tuid'] = $tuid->id;
             $_SESSION['username'] = $r['first_name'];
             $_SESSION['tel_id'] = $r['id'];
-            $this->tHello($r['id'], 'Здравствуйте '.$r['first_name'].'! Это телеграм бот сайта EE2RU.RU');
+            $this->tHello($r['id'], 'Здравствуйте '.$r['first_name'].'! Это телеграм бот сайта '.config('app.url').' Перейти на сайт: '.config('app.url'));
             Log::debug('SS: '.$_SESSION['id']);
             $out = [
                 'status'=>'2',

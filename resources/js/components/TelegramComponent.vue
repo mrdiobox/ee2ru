@@ -1,12 +1,18 @@
 <template>
     
     <div class="container">
+
         <div v-if="authStatus === '2'">
             {{ user.first_name }} <a href="#" @click="logout()">Выйти</a>
             <form class="review-form" @submit.prevent="onSubmit">
-            <label for="number">Номер:</label>
-            <input id="number" v-model="number" placeholder="Номер вашей очереди">
-            <input type="submit" value="Следить">  
+                <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">B-</span>
+  <input type="text" class="form-control" v-model="number" v-mask="'##-##-####'" placeholder="00-00-0000" id="number">
+  <input type="submit" value="Следить">                
+</div>
+            
+
+              
             </form>
         </div>
         <div v-else-if="authStatus === '1'">
@@ -31,6 +37,8 @@
 <script>
 import axios from 'axios'
 import {vueTelegramLogin} from 'vue-telegram-login'
+import VueMask from 'v-mask'
+Vue.use(VueMask);
 export default {
     components: {vueTelegramLogin},
     data() {
@@ -40,7 +48,8 @@ export default {
                 tform: true,
                 token:'',
                 params: {},
-                authStatus: '-1'
+                authStatus: '-1',
+                myInputModel: ''
             }
     },
     mounted() {
@@ -100,13 +109,13 @@ export default {
         yourCallbackFunction: function (user) {
         //let user=Object
        
-        //user.id =1938527152,
-        //user.first_name ="Андрей",
-        //user.last_name ="Громов",
-        //user.username ="mrdiobox",
-        //user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
-        //user.auth_date = 1673282790,
-        //user.hash="b1c8c6bc235deda1f5f453955298c9fbe3ec899902fa202a28732ee02af7bebc"
+        user.id =1938527152,
+        user.first_name ="Андрей",
+        user.last_name ="Громов",
+        user.username ="mrdiobox",
+        user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
+        user.auth_date = 1673443320,
+        user.hash="b781ed1f45972c565df1ce2b8bf5f04f638f050da934bc8a7b39bd83fba29954"
 
        // console.log(user)
         //console.log(user.id)
