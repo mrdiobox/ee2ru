@@ -125,6 +125,8 @@ class TelegramController extends Controller
         $ret = $this->checkTelegramAuthorization($r);
         Log::debug('ret: '.$ret);
         if ($ret == 'ok') {
+            if(!isset($r['last_name'])) $r['last_name'] = '';
+            if(!isset($r['photo_url'])) $r['photo_url'] = '';
             $telUsers->updateOrInsert(
                 ['user_id' => $r['id']],
                 [
