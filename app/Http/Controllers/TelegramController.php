@@ -127,6 +127,7 @@ class TelegramController extends Controller
         if ($ret == 'ok') {
             if(!isset($r['last_name'])) $r['last_name'] = '';
             if(!isset($r['photo_url'])) $r['photo_url'] = '';
+            if(!isset($r['username'])) $r['username'] = '';
             $telUsers->updateOrInsert(
                 ['user_id' => $r['id']],
                 [
