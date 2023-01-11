@@ -109,13 +109,13 @@ export default {
         yourCallbackFunction: function (user) {
         //let user=Object
        
-        user.id =1938527152,
-        user.first_name ="Андрей",
-        user.last_name ="Громов",
-        user.username ="mrdiobox",
-        user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
-        user.auth_date = 1673443320,
-        user.hash="b781ed1f45972c565df1ce2b8bf5f04f638f050da934bc8a7b39bd83fba29954"
+        //user.id =1938527152,
+        //user.first_name ="Андрей",
+        //user.last_name ="Громов",
+        //user.username ="mrdiobox",
+        //user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
+        //user.auth_date = 1673443320,
+        //user.hash="b781ed1f45972c565df1ce2b8bf5f04f638f050da934bc8a7b39bd83fba29954"
 
        // console.log(user)
         //console.log(user.id)
