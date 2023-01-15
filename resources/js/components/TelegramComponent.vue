@@ -80,7 +80,7 @@ export default {
             }
     },
     mounted() {
-        this.yourCallbackFunction(this.user)
+       // this.yourCallbackFunction(this.user)
         this.ifLogin()
     },
     methods: {
@@ -135,7 +135,7 @@ export default {
         },
         yourCallbackFunction: function (user) {
         //let user=Object
-       
+ /*      
         user.id =1938527152,
         user.first_name ="Андрей",
         user.last_name ="Громов",
@@ -143,7 +143,7 @@ export default {
         user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
         user.auth_date = 1673796383,
         user.hash="8993906a45850bdf7264f96e7d0883dfc60fceb5e13df03c05ba8817349b9227"
-
+*/
        // console.log(user)
         //console.log(user.id)
         axios.post('/tauth', user).then((response) => {

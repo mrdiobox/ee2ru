@@ -2525,7 +2525,7 @@ Vue.use(v_mask__WEBPACK_IMPORTED_MODULE_2__["default"]);
     };
   },
   mounted: function mounted() {
-    this.yourCallbackFunction(this.user);
+    // this.yourCallbackFunction(this.user)
     this.ifLogin();
   },
   methods: {
@@ -2584,9 +2584,15 @@ Vue.use(v_mask__WEBPACK_IMPORTED_MODULE_2__["default"]);
     yourCallbackFunction: function yourCallbackFunction(user) {
       var _this5 = this;
       //let user=Object
-
-      user.id = 1938527152, user.first_name = "Андрей", user.last_name = "Громов", user.username = "mrdiobox", user.photo_url = "https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg", user.auth_date = 1673796383, user.hash = "8993906a45850bdf7264f96e7d0883dfc60fceb5e13df03c05ba8817349b9227";
-
+      /*      
+             user.id =1938527152,
+             user.first_name ="Андрей",
+             user.last_name ="Громов",
+             user.username ="mrdiobox",
+             user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
+             user.auth_date = 1673796383,
+             user.hash="8993906a45850bdf7264f96e7d0883dfc60fceb5e13df03c05ba8817349b9227"
+      */
       // console.log(user)
       //console.log(user.id)
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/tauth', user).then(function (response) {
