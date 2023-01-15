@@ -3,31 +3,58 @@
     <div class="container">
 
         <div v-if="authStatus === '2'">
-            {{ user.first_name }} <a href="#" @click="logout()">Выйти</a>
+             
             <form class="review-form" @submit.prevent="onSubmit">
-                <div class="input-group mb-3">
+
+  
+  <div class="card">
+  <h5 class="card-header">Здравствуйте, {{ user.first_name }} / <a href="#" @click="logout()">Выйти</a></h5>
+  <div class="card-body">
+    <h5 class="card-title">Введите номер вашей очереди для получения уведомлений в Telegram:</h5>
+    <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">B-</span>
   <input type="text" class="form-control" v-model="number" v-mask="'##-##-####'" placeholder="00-00-0000" id="number">
-  <input type="submit" value="Следить">                
+  <input type="submit" value="Следить" class="btn btn-outline-primary me-3">  
+  </div>
+  </div>
 </div>
+
+
             
 
               
             </form>
         </div>
         <div v-else-if="authStatus === '1'">
-            {{ user.first_name }} : {{ number }}
-            <form class="review-form" @submit.prevent="onDelete">
-            <input type="submit" value="Удалить">
-            </form>
+            <div class="card">
+  <h5 class="card-header">Здравствуйте, {{ user.first_name }} / <a href="#" @click="logout()">Выйти</a></h5>
+  <div class="card-body">
+    <h5 class="card-title">Когда вас вызовут на границу, вы получите уведомление в Telegram</h5>
+            <ul class="list-group">
+                <li class="list-group-item active">                
+                    <form class="review-form" @submit.prevent="onDelete">
+                         Ваш номер очереди: <b>B-{{ number }}</b> <input type="submit" value="Остановить отслеживание" class="btn btn-warning mx-1 my-2">
+                    </form>
+                 </li>
+            </ul>
+            </div>
+            </div>
+ 
         </div>
         <div v-else>
-            <vue-telegram-login 
+            <div class="card">
+  <h5 class="card-header">
+    <vue-telegram-login 
             mode="callback"
             telegram-login="ee2ru_bot"
             @callback="yourCallbackFunction"
             requestAccess="write"
             size="medium" /> 
+  </h5>
+  <div class="card-body">
+          Чтобы отслеживать вашу очередь и получать уведомления, войдите с помощью Telegram.
+            </div>
+            </div>
         </div>
 
  
@@ -109,13 +136,13 @@ export default {
         yourCallbackFunction: function (user) {
         //let user=Object
        
-        //user.id =1938527152,
-        //user.first_name ="Андрей",
-        //user.last_name ="Громов",
-        //user.username ="mrdiobox",
-        //user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
-        //user.auth_date = 1673443320,
-        //user.hash="b781ed1f45972c565df1ce2b8bf5f04f638f050da934bc8a7b39bd83fba29954"
+        user.id =1938527152,
+        user.first_name ="Андрей",
+        user.last_name ="Громов",
+        user.username ="mrdiobox",
+        user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
+        user.auth_date = 1673796383,
+        user.hash="8993906a45850bdf7264f96e7d0883dfc60fceb5e13df03c05ba8817349b9227"
 
        // console.log(user)
         //console.log(user.id)

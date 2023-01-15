@@ -2477,6 +2477,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2558,13 +2585,7 @@ Vue.use(v_mask__WEBPACK_IMPORTED_MODULE_2__["default"]);
       var _this5 = this;
       //let user=Object
 
-      //user.id =1938527152,
-      //user.first_name ="Андрей",
-      //user.last_name ="Громов",
-      //user.username ="mrdiobox",
-      //user.photo_url ="https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg",
-      //user.auth_date = 1673443320,
-      //user.hash="b781ed1f45972c565df1ce2b8bf5f04f638f050da934bc8a7b39bd83fba29954"
+      user.id = 1938527152, user.first_name = "Андрей", user.last_name = "Громов", user.username = "mrdiobox", user.photo_url = "https://t.me/i/userpic/320/A3wuI20V1XnY-CHe3mDsFdVDFPILpLg6AaQDMIBK4qo.jpg", user.auth_date = 1673796383, user.hash = "8993906a45850bdf7264f96e7d0883dfc60fceb5e13df03c05ba8817349b9227";
 
       // console.log(user)
       //console.log(user.id)
@@ -58887,20 +58908,6 @@ var render = function () {
   return _c("div", { staticClass: "container" }, [
     _vm.authStatus === "2"
       ? _c("div", [
-          _vm._v("\n            " + _vm._s(_vm.user.first_name) + " "),
-          _c(
-            "a",
-            {
-              attrs: { href: "#" },
-              on: {
-                click: function ($event) {
-                  return _vm.logout()
-                },
-              },
-            },
-            [_vm._v("Выйти")]
-          ),
-          _vm._v(" "),
           _c(
             "form",
             {
@@ -58913,91 +58920,167 @@ var render = function () {
               },
             },
             [
-              _c("div", { staticClass: "input-group mb-3" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text",
-                    attrs: { id: "basic-addon1" },
-                  },
-                  [_vm._v("B-")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+              _c("div", { staticClass: "card" }, [
+                _c("h5", { staticClass: "card-header" }, [
+                  _vm._v(
+                    "Здравствуйте, " + _vm._s(_vm.user.first_name) + " / "
+                  ),
+                  _c(
+                    "a",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.number,
-                      expression: "number",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.logout()
+                        },
+                      },
                     },
-                    {
-                      name: "mask",
-                      rawName: "v-mask",
-                      value: "##-##-####",
-                      expression: "'##-##-####'",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "00-00-0000",
-                    id: "number",
-                  },
-                  domProps: { value: _vm.number },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.number = $event.target.value
-                    },
-                  },
-                }),
+                    [_vm._v("Выйти")]
+                  ),
+                ]),
                 _vm._v(" "),
-                _c("input", { attrs: { type: "submit", value: "Следить" } }),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(
+                      "Введите номер вашей очереди для получения уведомлений в Telegram:"
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "input-group-text",
+                        attrs: { id: "basic-addon1" },
+                      },
+                      [_vm._v("B-")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.number,
+                          expression: "number",
+                        },
+                        {
+                          name: "mask",
+                          rawName: "v-mask",
+                          value: "##-##-####",
+                          expression: "'##-##-####'",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "00-00-0000",
+                        id: "number",
+                      },
+                      domProps: { value: _vm.number },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.number = $event.target.value
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "btn btn-outline-primary me-3",
+                      attrs: { type: "submit", value: "Следить" },
+                    }),
+                  ]),
+                ]),
               ]),
             ]
           ),
         ])
       : _vm.authStatus === "1"
       ? _c("div", [
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.user.first_name) +
-              " : " +
-              _vm._s(_vm.number) +
-              "\n            "
-          ),
-          _c(
-            "form",
-            {
-              staticClass: "review-form",
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.onDelete.apply(null, arguments)
+          _c("div", { staticClass: "card" }, [
+            _c("h5", { staticClass: "card-header" }, [
+              _vm._v("Здравствуйте, " + _vm._s(_vm.user.first_name) + " / "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.logout()
+                    },
+                  },
                 },
-              },
-            },
-            [_c("input", { attrs: { type: "submit", value: "Удалить" } })]
-          ),
+                [_vm._v("Выйти")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(
+                  "Когда вас вызовут на границу, вы получите уведомление в Telegram"
+                ),
+              ]),
+              _vm._v(" "),
+              _c("ul", { staticClass: "list-group" }, [
+                _c("li", { staticClass: "list-group-item active" }, [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "review-form",
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.onDelete.apply(null, arguments)
+                        },
+                      },
+                    },
+                    [
+                      _vm._v("\n                         Ваш номер очереди: "),
+                      _c("b", [_vm._v("B-" + _vm._s(_vm.number))]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "btn btn-warning mx-1 my-2",
+                        attrs: {
+                          type: "submit",
+                          value: "Остановить отслеживание",
+                        },
+                      }),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
         ])
-      : _c(
-          "div",
-          [
-            _c("vue-telegram-login", {
-              attrs: {
-                mode: "callback",
-                "telegram-login": "ee2ru_bot",
-                requestAccess: "write",
-                size: "medium",
-              },
-              on: { callback: _vm.yourCallbackFunction },
-            }),
-          ],
-          1
-        ),
+      : _c("div", [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "h5",
+              { staticClass: "card-header" },
+              [
+                _c("vue-telegram-login", {
+                  attrs: {
+                    mode: "callback",
+                    "telegram-login": "ee2ru_bot",
+                    requestAccess: "write",
+                    size: "medium",
+                  },
+                  on: { callback: _vm.yourCallbackFunction },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n          Чтобы отслеживать вашу очередь и получать уведомления, войдите с помощью Telegram.\n            "
+              ),
+            ]),
+          ]),
+        ]),
   ])
 }
 var staticRenderFns = []
