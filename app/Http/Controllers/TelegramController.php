@@ -44,11 +44,11 @@ class TelegramController extends Controller
         $res = $Numbers->updateOrInsert(
             ['tuid' => $_SESSION['tuid'], 'status'=>'on'],
             [
-                'number' => $r['number']
+                'number' => 'B-'.$r['number']
             ]
         );
         if ($res) {
-            $this->tHello($_SESSION['tel_id'], 'Номер '.$r['number'].' добавлен для отслеживания');
+            $this->tHello($_SESSION['tel_id'], 'Номер '.'B-'.$r['number'].' добавлен для отслеживания');
             $ret = [
                 'status'=>'1',
                 'data'=>[
@@ -162,7 +162,6 @@ class TelegramController extends Controller
             'chat_id' => $id,
             'text'=> $message
         ]);
-        //echo $http;
     }
     public function getDataFromTg(){
         dd(config('settings.tbot_token'));

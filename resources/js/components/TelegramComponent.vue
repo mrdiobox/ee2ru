@@ -27,13 +27,13 @@
         </div>
         <div v-else-if="authStatus === '1'">
             <div class="card">
-  <h5 class="card-header">Здравствуйте, {{ user.first_name }} / <a href="#" @click="logout()">Выйти</a></h5>
+  <h5 class="card-header">{{ user.first_name }} : {{ number }}</h5>
   <div class="card-body">
     <h5 class="card-title">Когда вас вызовут на границу, вы получите уведомление в Telegram</h5>
             <ul class="list-group">
                 <li class="list-group-item active">                
                     <form class="review-form" @submit.prevent="onDelete">
-                         Ваш номер очереди: <b>B-{{ number }}</b> <input type="submit" value="Остановить отслеживание" class="btn btn-warning mx-1 my-2">
+                         Ваш номер очереди: <b>{{ number }}</b> <input type="submit" value="Остановить отслеживание" class="btn btn-warning mx-1 my-2">
                     </form>
                  </li>
             </ul>

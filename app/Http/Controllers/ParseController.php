@@ -6,8 +6,11 @@ use Goutte\Client;
 use Illuminate\Http\Request;
 use App\Models\Narva;
 use App\Models\Car;
+use App\Models\Number;
+use App\Models\Teluser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class ParseController extends Controller
 {
@@ -33,6 +36,7 @@ class ParseController extends Controller
     }
 
     public function doParse () {
+   
         $client = new Client();
         $url_table = 'https://www.eestipiir.ee/yphis/borderQueueInfo.action';
         $url_cars_ab = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=1';
@@ -121,7 +125,41 @@ class ParseController extends Controller
             $car->insert($this->results['cars_c']);
         }
 
-        echo 'ok!';
+        echo 'Parse... Done!';
 
+
+    }
+    public function doCheck() {
+        //check numbers
+        $telUsers = new Teluser();
+        $Numbers = new Number();
+        $cars = new Car();
+        $max_id= $cars->where('car_type','=','ab')->max('narva_id');
+        $rows = $Numbers->select('number', 'tuid', 'att', 'id as num_id')->where('status','=','on')->where('att','<',3)->get();
+        foreach ($rows as $row) {       
+
+            $cars_nums = $cars->select('id')
+            ->where('narva_id','=',$max_id)
+            ->where('number','=',$row->number)
+            ->get()->first();
+            if (isset($cars_nums->id)) {
+                //send message to telegram
+                $telnum = $telUsers->select('user_id')->where('id','=',$row->tuid)->get()->first();
+                echo 'Send to Telegram! to id='.$telnum->user_id.'<br>';
+                $this->tHello($telnum->user_id, 'Номер '.$row->number.', вас вызывают на границу!');
+                $Numbers->where('id','=',$row->num_id)->increment('att');
+                if ($row->att == 2) {
+                    $Numbers->where('id','=',$row->num_id)->update(['status' => 'off']);
+                }
+            }
+        }
+        echo 'Check... Done!';
+    }
+
+    public function tHello($id, $message) {
+        $http = Http::post('https://api.telegram.org/bot'.config('custom.telegram_token').'/sendMessage', [
+            'chat_id' => $id,
+            'text'=> $message
+        ]);
     }
 }

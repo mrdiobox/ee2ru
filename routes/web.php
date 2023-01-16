@@ -26,6 +26,7 @@ Route::any('/removenumber', [ TelegramController::class, 'removeNumber' ]);
 Route::any('/logout', [ TelegramController::class, 'logout' ]);
 Route::get('/iflogin', [ TelegramController::class, 'ifLogin' ]);
 Route::get('/doparse', [ ParseController::class, 'doParse' ]);
+Route::get('/docheck', [ ParseController::class, 'doCheck' ]);
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:cache');

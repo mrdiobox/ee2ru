@@ -59008,19 +59008,7 @@ var render = function () {
       ? _c("div", [
           _c("div", { staticClass: "card" }, [
             _c("h5", { staticClass: "card-header" }, [
-              _vm._v("Здравствуйте, " + _vm._s(_vm.user.first_name) + " / "),
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.logout()
-                    },
-                  },
-                },
-                [_vm._v("Выйти")]
-              ),
+              _vm._v(_vm._s(_vm.user.first_name) + " : " + _vm._s(_vm.number)),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
@@ -59045,7 +59033,7 @@ var render = function () {
                     },
                     [
                       _vm._v("\n                         Ваш номер очереди: "),
-                      _c("b", [_vm._v("B-" + _vm._s(_vm.number))]),
+                      _c("b", [_vm._v(_vm._s(_vm.number))]),
                       _vm._v(" "),
                       _c("input", {
                         staticClass: "btn btn-warning mx-1 my-2",
