@@ -83,7 +83,7 @@ class EeController extends Controller
         }
         if ($days) {
         $days2 = array_map(function($num){
-            $delta = 1;
+            $delta = 3;
             $ret = substr($num, -2);
             $ret = $ret + $delta;
             if($ret>=24) $ret = 0 + $ret - 24;
