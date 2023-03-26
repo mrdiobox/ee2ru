@@ -63,7 +63,7 @@
 <div id="app">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container">
-    <a href="#" class="navbar-brand"><img src="{{asset('img/logo.svg')}}" alt="" width=270 title='е-е-ту-ру-ру'></a>
+    <a href="./" class="navbar-brand"><img src="{{asset('img/logo.svg')}}" alt="" width=270 title='е-е-ту-ру-ру'></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="true">
       <span class="navbar-toggler-icon"></span>
     </button>
