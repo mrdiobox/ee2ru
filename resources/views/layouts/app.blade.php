@@ -87,7 +87,7 @@
     <footer class="pt-2 my-2 my-md-2 border-top mt-auto">
       <div class="row">
         <div class="col-12 col-md">
-          <h6 class="ms-3">&copy; 2022 ee2ru.ru - очередь на границе Нарва-Ивангород (информационный сервис)</h6>
+          <h6 class="ms-3">&copy; 2022-2023 ee2ru.ru - очередь на границе Нарва-Ивангород (информационный сервис)</h6>
         </div>
       </div>
     </footer>
