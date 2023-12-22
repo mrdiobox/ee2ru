@@ -26,7 +26,7 @@ class ParseController extends Controller
     }
 
     public function uptoOrNum($row) {
-        if ((trim($row) == 'up to 1 hour') OR (trim($row) == 'On time')) {
+        if ((trim($row) == 'up to 1 hour') OR (trim($row) == 'On time') OR (trim($row) == 'N/A')) {
             $ret = 0;
         }
         else {
