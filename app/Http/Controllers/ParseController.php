@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use App\Models\Narva;
+use App\Models\Koidula;
+use App\Models\Luhamaa;
 use App\Models\Car;
 use App\Models\Number;
 use App\Models\Teluser;
@@ -17,10 +19,10 @@ class ParseController extends Controller
     private $row_results = Array();
     private $results = Array();
 
-    public function addNarvaId($arr, $narva_id) {
+    public function addBorderId($arr, $border_id, $col) {
         foreach ($arr as $k=>$v) {
             $ret[$k] = $v;
-            $ret[$k]['narva_id'] = $narva_id;
+            $ret[$k][$col] = $border_id;
         }
         return $ret;
     }
@@ -43,8 +45,8 @@ class ParseController extends Controller
         $url_cars_c = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=2';
         
         //Narva main table
-        $page = $client->request(method:'GET', uri:$url_table);
-        $narva_tbl = $page->filter('table.maintable')->first();
+        $m_page = $client->request(method:'GET', uri:$url_table);
+        $narva_tbl = $m_page->filter('table.maintable')->eq(0);
 
         $narva_tbl->filter('td')->each(function($item){
             $this->row_results['narva'][$item->attr('id')] =  $item->text();
@@ -110,7 +112,7 @@ class ParseController extends Controller
                 $this->row_results['cars_ab'][$i]['number'] =  $item->text();
                 $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
             });
-            $this->results['cars_ab'] = $this->addNarvaId($this->row_results['cars_ab'], $last_id);
+            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'narva_id');
             $car->insert($this->results['cars_ab']);
         }
         //Cars C
@@ -121,13 +123,144 @@ class ParseController extends Controller
                 $this->row_results['cars_c'][$i]['number'] = $item->text();
                 $this->row_results['cars_c'][$i]['car_type'] = 'c';
             });
-            $this->results['cars_c'] = $this->addNarvaId($this->row_results['cars_c'], $last_id);
+            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'narva_id');
             $car->insert($this->results['cars_c']);
         }
 
-        echo 'Parse... Done!';
+        echo 'Parse... Narva. Done!';
+        // ************************************ End Narva **********************************
 
+        $url_cars_ab = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=4';
+        $url_cars_c = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=5';
+        
+        //Koidula main table
+        $koidula_tbl = $m_page->filter('table.maintable')->eq(1);
 
+        $koidula_tbl->filter('td')->each(function($item){
+            $this->row_results['koidula'][$item->attr('id')] =  $item->text();
+        });
+
+        $this->results['koidula']['lql_ab'] = $this->uptoOrNum($this->row_results['koidula']['lql-4']);
+        $this->results['koidula']['nvl_ab'] = $this->row_results['koidula']['nvl-4'];
+        $this->results['koidula']['nvf_ab'] = $this->uptoOrNum($this->row_results['koidula']['nvf-4']);
+        $this->results['koidula']['frt_ab'] = Carbon::parse($this->row_results['koidula']['frt-4']);
+        $this->results['koidula']['lagh_ab'] = $this->uptoOrNum($this->row_results['koidula']['lagh-4']);
+
+        $validator = Validator::make($this->results['koidula'], [
+            'lql_ab' => 'integer',
+            'nvl_ab' => 'integer',
+            'nvf_ab' => 'integer',
+            'frt_ab' => 'date',
+            'lagh_ab' => 'integer'
+        ]);
+
+        if ($validator->fails()) {
+           \Log::debug('Koidula parse validation error', $this->results['koidula']);
+        }
+ 
+        $koidula = new Koidula();
+        
+        $koidula->lql_ab = $this->results['koidula']['lql_ab'];
+        $koidula->nvl_ab = $this->results['koidula']['nvl_ab'];
+        $koidula->nvf_ab = $this->results['koidula']['nvf_ab'];
+        $koidula->frt_ab = $this->results['koidula']['frt_ab'];
+        $koidula->lagh_ab = $this->results['koidula']['lagh_ab'];
+    
+        $koidula->save();
+        $last_id = $koidula->id;
+
+        $car = new Car();
+        //Cars AB
+        $page = $client->request(method:'GET', uri:$url_cars_ab);
+        $list_tbl = $page->filter('table.maintable')->filter('td');
+        if ($list_tbl->count()) {
+            $list_tbl->filter('td')->each(function($item, $i){
+                $this->row_results['cars_ab'][$i]['number'] =  $item->text();
+                $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
+            });
+            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'koidula_id'); //!!!!!!!
+            $car->insert($this->results['cars_ab']);
+        }
+        //Cars C
+        $page = $client->request(method:'GET', uri:$url_cars_c);
+        $list_tbl = $page->filter('table.maintable')->filter('td');
+        if ($list_tbl->count()) {
+            $list_tbl->each(function($item, $i){
+                $this->row_results['cars_c'][$i]['number'] = $item->text();
+                $this->row_results['cars_c'][$i]['car_type'] = 'c';
+            });
+            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'koidula_id');   //!!!!!!
+            $car->insert($this->results['cars_c']);
+        }
+
+        echo 'Parse... Koidula. Done!';       
+
+        // ************************************ End Koidula **********************************
+        
+        $url_cars_ab = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=7';
+        $url_cars_c = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=8';
+        
+        //luhamaa main table
+        $luhamaa_tbl = $m_page->filter('table.maintable')->eq(2);
+
+        $luhamaa_tbl->filter('td')->each(function($item){
+            $this->row_results['luhamaa'][$item->attr('id')] =  $item->text();
+        });
+
+        $this->results['luhamaa']['lql_ab'] = $this->uptoOrNum($this->row_results['luhamaa']['lql-7']);
+        $this->results['luhamaa']['nvl_ab'] = $this->row_results['luhamaa']['nvl-7'];
+        $this->results['luhamaa']['nvf_ab'] = $this->uptoOrNum($this->row_results['luhamaa']['nvf-7']);
+        $this->results['luhamaa']['frt_ab'] = Carbon::parse($this->row_results['luhamaa']['frt-7']);
+        $this->results['luhamaa']['lagh_ab'] = $this->uptoOrNum($this->row_results['luhamaa']['lagh-7']);
+
+        $validator = Validator::make($this->results['luhamaa'], [
+            'lql_ab' => 'integer',
+            'nvl_ab' => 'integer',
+            'nvf_ab' => 'integer',
+            'frt_ab' => 'date',
+            'lagh_ab' => 'integer'
+        ]);
+
+        if ($validator->fails()) {
+           \Log::debug('Luhamaa parse validation error', $this->results['luhamaa']);
+        }
+ 
+        $luhamaa = new Luhamaa();
+        
+        $luhamaa->lql_ab = $this->results['luhamaa']['lql_ab'];
+        $luhamaa->nvl_ab = $this->results['luhamaa']['nvl_ab'];
+        $luhamaa->nvf_ab = $this->results['luhamaa']['nvf_ab'];
+        $luhamaa->frt_ab = $this->results['luhamaa']['frt_ab'];
+        $luhamaa->lagh_ab = $this->results['luhamaa']['lagh_ab'];
+    
+        $luhamaa->save();
+        $last_id = $luhamaa->id;
+
+        $car = new Car();
+        //Cars AB
+        $page = $client->request(method:'GET', uri:$url_cars_ab);
+        $list_tbl = $page->filter('table.maintable')->filter('td');
+        if ($list_tbl->count()) {
+            $list_tbl->filter('td')->each(function($item, $i){
+                $this->row_results['cars_ab'][$i]['number'] =  $item->text();
+                $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
+            });
+            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'luhamaa_id'); //!!!!!!!
+            $car->insert($this->results['cars_ab']);
+        }
+        //Cars C
+        $page = $client->request(method:'GET', uri:$url_cars_c);
+        $list_tbl = $page->filter('table.maintable')->filter('td');
+        if ($list_tbl->count()) {
+            $list_tbl->each(function($item, $i){
+                $this->row_results['cars_c'][$i]['number'] = $item->text();
+                $this->row_results['cars_c'][$i]['car_type'] = 'c';
+            });
+            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'luhamaa_id');   //!!!!!!
+            $car->insert($this->results['cars_c']);
+        }
+
+        echo 'Parse... Luhamaa. Done!';   
     }
     public function doCheck() {
         //check numbers
