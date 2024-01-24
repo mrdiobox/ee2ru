@@ -109,22 +109,22 @@ class ParseController extends Controller
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->filter('td')->each(function($item, $i){
-                $this->row_results['cars_ab'][$i]['number'] =  $item->text();
-                $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
+                $this->row_results['cars_ab_n'][$i]['number'] =  $item->text();
+                $this->row_results['cars_ab_n'][$i]['car_type'] =  'ab';
             });
-            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'narva_id');
-            $car->insert($this->results['cars_ab']);
+            $this->results['cars_ab_n'] = $this->addBorderId($this->row_results['cars_ab_n'], $last_id, 'narva_id');
+            $car->insert($this->results['cars_ab_n']);
         }
         //Cars C
         $page = $client->request(method:'GET', uri:$url_cars_c);
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->each(function($item, $i){
-                $this->row_results['cars_c'][$i]['number'] = $item->text();
-                $this->row_results['cars_c'][$i]['car_type'] = 'c';
+                $this->row_results['cars_c_n'][$i]['number'] = $item->text();
+                $this->row_results['cars_c_n'][$i]['car_type'] = 'c';
             });
-            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'narva_id');
-            $car->insert($this->results['cars_c']);
+            $this->results['cars_c_n'] = $this->addBorderId($this->row_results['cars_c_n'], $last_id, 'narva_id');
+            $car->insert($this->results['cars_c_n']);
         }
 
         echo 'Parse... Narva. Done!';
@@ -175,22 +175,22 @@ class ParseController extends Controller
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->filter('td')->each(function($item, $i){
-                $this->row_results['cars_ab'][$i]['number'] =  $item->text();
-                $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
+                $this->row_results['cars_ab_k'][$i]['number'] =  $item->text();
+                $this->row_results['cars_ab_k'][$i]['car_type'] =  'ab';
             });
-            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'koidula_id'); //!!!!!!!
-            $car->insert($this->results['cars_ab']);
+            $this->results['cars_ab_k'] = $this->addBorderId($this->row_results['cars_ab_k'], $last_id, 'koidula_id'); //!!!!!!!
+            $car->insert($this->results['cars_ab_k']);
         }
         //Cars C
         $page = $client->request(method:'GET', uri:$url_cars_c);
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->each(function($item, $i){
-                $this->row_results['cars_c'][$i]['number'] = $item->text();
-                $this->row_results['cars_c'][$i]['car_type'] = 'c';
+                $this->row_results['cars_c_k'][$i]['number'] = $item->text();
+                $this->row_results['cars_c_k'][$i]['car_type'] = 'c';
             });
-            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'koidula_id');   //!!!!!!
-            $car->insert($this->results['cars_c']);
+            $this->results['cars_c_k'] = $this->addBorderId($this->row_results['cars_c_k'], $last_id, 'koidula_id');   //!!!!!!
+            $car->insert($this->results['cars_c_k']);
         }
 
         echo 'Parse... Koidula. Done!';       
@@ -242,22 +242,22 @@ class ParseController extends Controller
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->filter('td')->each(function($item, $i){
-                $this->row_results['cars_ab'][$i]['number'] =  $item->text();
-                $this->row_results['cars_ab'][$i]['car_type'] =  'ab';
+                $this->row_results['cars_ab_l'][$i]['number'] =  $item->text();
+                $this->row_results['cars_ab_l'][$i]['car_type'] =  'ab';
             });
-            $this->results['cars_ab'] = $this->addBorderId($this->row_results['cars_ab'], $last_id, 'luhamaa_id'); //!!!!!!!
-            $car->insert($this->results['cars_ab']);
+            $this->results['cars_ab_l'] = $this->addBorderId($this->row_results['cars_ab_l'], $last_id, 'luhamaa_id'); //!!!!!!!
+            $car->insert($this->results['cars_ab_l']);
         }
         //Cars C
         $page = $client->request(method:'GET', uri:$url_cars_c);
         $list_tbl = $page->filter('table.maintable')->filter('td');
         if ($list_tbl->count()) {
             $list_tbl->each(function($item, $i){
-                $this->row_results['cars_c'][$i]['number'] = $item->text();
-                $this->row_results['cars_c'][$i]['car_type'] = 'c';
+                $this->row_results['cars_c_l'][$i]['number'] = $item->text();
+                $this->row_results['cars_c_l'][$i]['car_type'] = 'c';
             });
-            $this->results['cars_c'] = $this->addBorderId($this->row_results['cars_c'], $last_id, 'luhamaa_id');   //!!!!!!
-            $car->insert($this->results['cars_c']);
+            $this->results['cars_c_l'] = $this->addBorderId($this->row_results['cars_c_l'], $last_id, 'luhamaa_id');   //!!!!!!
+            $car->insert($this->results['cars_c_l']);
         }
 
         echo 'Parse... Luhamaa. Done!';   
