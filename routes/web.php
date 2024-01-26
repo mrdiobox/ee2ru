@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\ParseController;
 use App\Http\Controllers\TelegramController;
+/*
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+*/
 
 Route::any('/telegramsecret', [ TelegramController::class, 'getDataFromTg' ]);
 Route::any('/thello/{id}', [ TelegramController::class, 'tHello' ]);
@@ -36,8 +38,8 @@ Route::get('/clear', function () {
     return "Кэш очищен.";
 });
 
-Route::get('/', [App\Http\Controllers\EeController::class, 'index']);
-Route::get('/ee/data-chart/{delta?}', [App\Http\Controllers\EeController::class, 'chartData']);
-Route::get('/ee/progress', [App\Http\Controllers\EeController::class, 'progressData']);
-Route::get('/ee/cars', [App\Http\Controllers\EeController::class, 'getCars']);
 Route::view('/about', 'about');
+Route::get('/{border?}', [App\Http\Controllers\EeController::class, 'index']);
+Route::get('/ee/data-chart/{border_id?}/{delta?}', [App\Http\Controllers\EeController::class, 'chartData']);
+Route::get('/ee/progress/{border_id?}', [App\Http\Controllers\EeController::class, 'progressData']);
+Route::get('/ee/cars/{border_id?}', [App\Http\Controllers\EeController::class, 'getCars']);

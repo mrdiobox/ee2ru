@@ -11,7 +11,7 @@
         </p>
     </vue-ellipse-progress>
     <strong>
-    <p v-show="sh">Сейчас: 
+    <p v-show="sh">Сейчас:
       <span v-if="frt == 0">без задержки.</span>
       <span v-else>задержка {{frt}} часов.</span>
       <br>
@@ -30,6 +30,12 @@ import axios from 'axios'
 import { bottom } from '@popperjs/core';
 
 export default {
+  props: {
+   border_id: {
+       type: String,
+       default: '',
+   },
+},
   components: { tttt, bus },
   data: function() {
             return {
@@ -43,8 +49,13 @@ export default {
   created() {
      this.run()
    },
+   mounted () {
+            // Как-то обрабатываем данные
+            
+        },
   methods: {
     run: function () {      
+
                 let roundColor = ['#65B031', '#D1EA2C','#FFFE34', '#F9BC02', '#FA9801', '#FE2713','#A7194B', '#6F1032', '#370819', '#000098', '#000065'];
                 let color1 = '#f6e9f0'
                 let color2 = 'black'
@@ -59,7 +70,8 @@ export default {
                     loading: true
                   }
                 ]
-                axios.get('/ee/progress').then((response) => {
+
+                axios.get('/ee/progress/'+this.border_id).then((response) => {
 
                   if (response.data.frt >= roundColor.length-1) {
                     color1 = roundColor.slice(-1)
@@ -84,7 +96,7 @@ export default {
                 ]
                 this.sh=true
                 this.prog2 = response.data.progress2
-                this.frt = response.data.frt
+                this.frt = response.data.frt  
                 console.log(this.data[1].progress);
                 });
                 bus.$on("mega-event", (name)=>{

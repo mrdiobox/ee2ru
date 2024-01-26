@@ -2169,6 +2169,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    border_id: {
+      type: String,
+      "default": ''
+    }
+  },
   name: 'LineChartUp',
   components: {
     LineChartDown: _LineChart_js__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2220,7 +2226,7 @@ __webpack_require__.r(__webpack_exports__);
           display: false
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + delta).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + this.border_id + '/' + delta).then(function (response) {
         _this.data = response.data;
         console.log('test');
         console.log(_this.data.bar.datasets[0].data[0]);
@@ -2244,7 +2250,7 @@ __webpack_require__.r(__webpack_exports__);
       if (act == 'back') delta++;
       if (act == 'next') delta--;
       console.log(delta);
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + delta).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + this.border_id + '/' + delta).then(function (response) {
         _this2.data = response.data;
         _this2.loading = false;
       });
@@ -2254,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
       var delta = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       delta--;
       console.log(delta);
-      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + delta).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().get('/ee/data-chart/' + this.border_id + '/' + delta).then(function (response) {
         _this3.data = response.data;
       });
     }
@@ -2290,6 +2296,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    border_id: {
+      type: String,
+      "default": ''
+    }
+  },
   data: function data() {
     return {
       nums: []
@@ -2297,7 +2309,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/ee/cars').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/ee/cars/' + this.border_id).then(function (response) {
       _this.nums = response.data.cars;
       console.log(response.data.cars);
       console.log(_this.nums);
@@ -2355,6 +2367,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    border_id: {
+      type: String,
+      "default": ''
+    }
+  },
   components: {
     tttt: vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_1__.tttt,
     bus: _Bus__WEBPACK_IMPORTED_MODULE_0__.bus
@@ -2370,6 +2388,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.run();
+  },
+  mounted: function mounted() {
+    // Как-то обрабатываем данные
   },
   methods: {
     run: function run() {
@@ -2388,7 +2409,7 @@ __webpack_require__.r(__webpack_exports__);
         progress: 100,
         loading: true
       }];
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/ee/progress').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/ee/progress/' + this.border_id).then(function (response) {
         if (response.data.frt >= roundColor.length - 1) {
           color1 = roundColor.slice(-1);
           color2 = roundColor.slice(-2);
@@ -58865,7 +58886,7 @@ var render = function () {
             ],
           },
           [
-            _vm._v("Сейчас: \n      "),
+            _vm._v("Сейчас:\n      "),
             _vm.frt == 0
               ? _c("span", [_vm._v("без задержки.")])
               : _c("span", [_vm._v("задержка " + _vm._s(_vm.frt) + " часов.")]),

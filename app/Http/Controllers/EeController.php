@@ -4,17 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Narva;
+use App\Models\Koidula;
+use App\Models\Luhamaa;
 use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 
 class EeController extends Controller
 {
-    public function index() {
-       return view('ee');
+    public function index($border='') {
+        $data['border_tag'] = $border;
+        if ($data['border_tag'] == 'narva') {
+            $data['border_id'] = 1;
+            $data['border_title'] = 'Нарва - Ивангород';
+        } elseif ($data['border_tag'] == 'koidula') {
+            $data['border_id'] = 2;
+            $data['border_title'] = 'Койдула - Кунична Гора';
+        } elseif ($data['border_tag'] == 'luhamaa') {
+            $data['border_id'] = 3;
+            $data['border_title'] = 'Лухамаа - Шумилкино';
+        }
+        else {
+            $data['border_tag'] == 'narva';
+            $data['border_id'] = 1;
+            $data['border_title'] = 'Нарва - Ивангород';
+        }
+       return view('ee', $data);
     }
 
-    public function progressData() {
-        $narva = new Narva();
+    public function progressData($border_id=0) {
+        if ($border_id==1) $narva = new Narva();
+        if ($border_id==2) $narva = new Koidula();
+        if ($border_id==3) $narva = new Luhamaa();
+
+       // \Log::debug('Our Class', Array($class));
         $cur_date = \Carbon\Carbon::now()->addDay(-0)->addHour(-0)->toDateTimeString();
         $cur_date2 = \Carbon\Carbon::now()->addDay(-0)->addHour(-1)->toDateTimeString();
         $lags= $narva->select(DB::raw('id, lagh_ab , created_at'))
@@ -43,9 +65,11 @@ class EeController extends Controller
             //sleep(5);
             return $ret;
      }
-    public function chartData($delta=0) {
-        
-        $narva = new Narva();
+    public function chartData($border_id, $delta=0) {
+        if ($border_id==1) $narva = new Narva();
+        if ($border_id==2) $narva = new Koidula();
+        if ($border_id==3) $narva = new Luhamaa();
+    
         $cur_date = \Carbon\Carbon::now()->addDay(-$delta)->toDateString();
     
         if ($delta!=0) {
@@ -123,10 +147,13 @@ class EeController extends Controller
             'delta'=>$delta, 'text'=>$text
         );
     }
-    public function getCars() {
+    public function getCars($border_id) {
+        if ($border_id==1) $border = 'narva';
+        if ($border_id==2) $border = 'koidula';
+        if ($border_id==3) $border = 'luhamaa';
         $cars = new Car();
-        $max_id= $cars->where('car_type','=','ab')->max('narva_id');
-        $cars_nums = $cars->select('number')->where('narva_id','=',$max_id)->orderby('id')->get();
+        $max_id= $cars->where('car_type','=','ab')->max($border.'_id');
+        $cars_nums = $cars->select('number')->where($border.'_id','=',$max_id)->where($border.'_id','!=',0)->orderby('id')->get();
         foreach($cars_nums as $cars_num) {
             $nums[] = $cars_num->number;
         }

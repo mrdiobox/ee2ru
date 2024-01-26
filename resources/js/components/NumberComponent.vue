@@ -12,6 +12,12 @@
 <script>
 import axios from 'axios'
 export default {
+  props: {
+   border_id: {
+       type: String,
+       default: '',
+   },
+},
     data() {
             return {
                 nums:[]
@@ -19,7 +25,7 @@ export default {
     },
     mounted() {
         
-        axios.get('/ee/cars').then((response) => {
+        axios.get('/ee/cars/'+this.border_id).then((response) => {
                     this.nums=response.data.cars
                     console.log(response.data.cars)
                     console.log(this.nums)

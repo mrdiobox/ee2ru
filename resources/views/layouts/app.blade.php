@@ -70,7 +70,13 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mb-2">
         <li class="nav-item">
-          <a href="./" class="nav-link">Очередь сейчас</a>
+          <a href="./" class="nav-link">Очередь сейчас Нарва</a>
+        </li>
+        
+          <a href="koidula" class="nav-link">Койдула</a>
+        </li>
+        <li class="nav-item">
+          <a href="luhamaa" class="nav-link">Лухамаа</a>
         </li>
         <li class="nav-item">
           <a href="/about" class="nav-link">О сервисе</a>

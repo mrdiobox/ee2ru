@@ -30,6 +30,12 @@ import BarChart from './BarChart.js'
 import axios from 'axios'
 
     export default {
+        props: {
+        border_id: {
+        type: String,
+        default: '',
+    },
+    },
         name: 'LineChartUp',
         components: {
             LineChartDown,
@@ -80,7 +86,7 @@ import axios from 'axios'
                             display: false 
                         }
                     }
-                axios.get('/ee/data-chart/'+delta).then((response) => {
+                axios.get('/ee/data-chart/'+this.border_id+'/'+delta).then((response) => {
                     this.data=response.data
 
                 console.log('test');
@@ -107,7 +113,7 @@ import axios from 'axios'
                 if (act=='back') delta++;
                 if (act=='next') delta--;
                 console.log(delta);
-                axios.get('/ee/data-chart/'+delta).then((response) => {
+                axios.get('/ee/data-chart/'+this.border_id+'/'+delta).then((response) => {
                     this.data=response.data
                     this.loading=false
                 });
@@ -115,7 +121,7 @@ import axios from 'axios'
             downdate: function (delta=0) {
                 delta--;
                 console.log(delta);
-                axios.get('/ee/data-chart/'+delta).then((response) => {
+                axios.get('/ee/data-chart/'+this.border_id+'/'+delta).then((response) => {
                     this.data=response.data
                 });
             }
