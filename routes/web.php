@@ -39,7 +39,7 @@ Route::get('/clear', function () {
 });
 
 Route::view('/about', 'about');
-Route::get('/{border?}', [App\Http\Controllers\EeController::class, 'index']);
 Route::get('/ee/data-chart/{border_id?}/{delta?}', [App\Http\Controllers\EeController::class, 'chartData']);
 Route::get('/ee/progress/{border_id?}', [App\Http\Controllers\EeController::class, 'progressData']);
 Route::get('/ee/cars/{border_id?}', [App\Http\Controllers\EeController::class, 'getCars']);
+Route::get('/{border?}', [App\Http\Controllers\EeController::class, 'index']);
