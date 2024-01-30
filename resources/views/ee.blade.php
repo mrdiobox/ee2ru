@@ -5,6 +5,9 @@
 <div class="container my-0">
     <div class="row">
         <div class="col-md-4 col-sm-12 text-center">
+        <div class="alert alert-warning" role="alert">
+  Внимание! Сайт обновлен! Для корректной работы (<b>если не отображаются очереди</b>), очистите кэш вашего браузера. Ctrl-F5
+</div>
         <a class="btn btn-primary" href="./" role="button">Нарва</a>
         <a class="btn btn-primary" href="koidula" role="button">Койдула</a>
         <a class="btn btn-primary" href="luhamaa" role="button">Лухамаа</a>
