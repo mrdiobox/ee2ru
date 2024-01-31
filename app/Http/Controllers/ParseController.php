@@ -55,7 +55,8 @@ class ParseController extends Controller
         $this->results['narva']['lql_ab'] = $this->uptoOrNum($this->row_results['narva']['lql-1']);
         $this->results['narva']['nvl_ab'] = $this->row_results['narva']['nvl-1'];
         $this->results['narva']['nvf_ab'] = $this->uptoOrNum($this->row_results['narva']['nvf-1']);
-        $this->results['narva']['frt_ab'] = Carbon::parse($this->row_results['narva']['frt-1']);
+        //$this->results['narva']['frt_ab'] = Carbon::parse($this->row_results['narva']['frt-1']);
+        $this->results['narva']['frt_ab'] = '2025-01-01 00:00:01';
         $this->results['narva']['lagh_ab'] = $this->uptoOrNum($this->row_results['narva']['lagh-1']);
         /*
         $this->results['narva']['nvl_c'] = $this->row_results['narva']['nvl-2'];
