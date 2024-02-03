@@ -103,7 +103,7 @@ class ParseController extends Controller
         */
         $narva->save();
         $last_id = $narva->id;
-
+/*
         $car = new Car();
         //Cars AB
         $page = $client->request(method:'GET', uri:$url_cars_ab);
@@ -127,6 +127,7 @@ class ParseController extends Controller
             $this->results['cars_c_n'] = $this->addBorderId($this->row_results['cars_c_n'], $last_id, 'narva_id');
             $car->insert($this->results['cars_c_n']);
         }
+        */
 
         echo 'Parse... Narva. Done!';
         // ************************************ End Narva **********************************
