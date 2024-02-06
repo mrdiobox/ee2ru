@@ -46,7 +46,7 @@ class ParseController extends Controller
         
         //Narva main table
         $m_page = $client->request(method:'GET', uri:$url_table);
-        $narva_tbl = $m_page->filter('table.maintable')->eq(0);
+        $narva_tbl = $m_page->filter('table.maintable')->eq(2);
 
         $narva_tbl->filter('td')->each(function($item){
             $this->row_results['narva'][$item->attr('id')] =  $item->text();
@@ -136,7 +136,7 @@ class ParseController extends Controller
         $url_cars_c = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=5';
         
         //Koidula main table
-        $koidula_tbl = $m_page->filter('table.maintable')->eq(1);
+        $koidula_tbl = $m_page->filter('table.maintable')->eq(0);
 
         $koidula_tbl->filter('td')->each(function($item){
             $this->row_results['koidula'][$item->attr('id')] =  $item->text();
@@ -203,7 +203,7 @@ class ParseController extends Controller
         $url_cars_c = 'https://www.eestipiir.ee/yphis/showCalledVehicles.action?borderCrossingQueue.id=8';
         
         //luhamaa main table
-        $luhamaa_tbl = $m_page->filter('table.maintable')->eq(2);
+        $luhamaa_tbl = $m_page->filter('table.maintable')->eq(1);
 
         $luhamaa_tbl->filter('td')->each(function($item){
             $this->row_results['luhamaa'][$item->attr('id')] =  $item->text();
